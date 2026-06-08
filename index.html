@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Catalog Produse</title>
+<button id="themeToggle">🌙 Dark Mode</button>
 
 <style>
 body{
@@ -80,6 +81,47 @@ h1{
     color: #777;
     margin-top: 30px;
 }
+
+#themeToggle{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+body.dark{
+    background:#121212;
+    color:white;
+}
+
+body.dark .product{
+    background:#1e1e1e;
+    color:white;
+}
+
+body.dark .price{
+    color:#5cff8d;
+}
+
+body.dark #search{
+    background:#222;
+    color:white;
+    border:1px solid #444;
+}
+
+body.dark .brand{
+    color:white;
+    border-bottom:3px solid #666;
+}
+
+body.dark .category{
+    background:#333;
+    color:white;
+}
+
+    
 </style>
 </head>
 <body>
@@ -195,6 +237,38 @@ document
 
     });
 
+ const themeToggle =
+    document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark");
+
+    themeToggle.innerText =
+        "☀️ Light Mode";
+}
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+
+        localStorage.setItem("theme","dark");
+
+        themeToggle.innerText =
+            "☀️ Light Mode";
+
+    } else {
+
+        localStorage.setItem("theme","light");
+
+        themeToggle.innerText =
+            "🌙 Dark Mode";
+    }
+
+});
+    
 </script>
 
 </body>
