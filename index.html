@@ -127,6 +127,16 @@ body.dark .category{
     color:white;
 }
 
+.category{
+    cursor:pointer;
+    user-select:none;
+}
+
+.category-products{
+    display:none;
+    margin-bottom:15px;
+}    
+
     
 </style>
 </head>
@@ -174,14 +184,15 @@ function afiseazaProduse(filtru = "") {
 
     container.innerHTML = "";
 
-    let rezultate = 0;
+    let currentCategoryId = "";
+    let categoryCounter = 0;
 
     produse.forEach(p => {
 
-        const tip = String(p.Tip || "").trim().toLowerCase();
-        const nume = String(p.Producator || "").trim();
-        const pret = String(p.Pret || "").trim();
-        const link = String(p.Link || "#").trim();
+        const tip = (p.Tip || "").trim().toLowerCase();
+        const nume = (p.Producator || "").trim();
+        const pret = (p.Pret || "").trim();
+        const link = (p.Link || "#").trim();
 
         if (tip === "brand") {
 
@@ -192,8 +203,20 @@ function afiseazaProduse(filtru = "") {
 
         else if (tip === "categorie") {
 
+            categoryCounter++;
+
+            currentCategoryId =
+                "cat_" + categoryCounter;
+
             container.innerHTML += `
-                <h3 class="category">${nume}</h3>
+                <div class="category"
+                     onclick="toggleCategory('${currentCategoryId}', this)">
+                    ▶ ${nume}
+                </div>
+
+                <div id="${currentCategoryId}"
+                     class="category-products">
+                </div>
             `;
         }
 
@@ -206,24 +229,29 @@ function afiseazaProduse(filtru = "") {
                 return;
             }
 
-            rezultate++;
+            const categoryDiv =
+                document.getElementById(currentCategoryId);
 
-            container.innerHTML += `
-                <a
-                    class="product"
-                    href="${link}"
-                    target="_blank"
-                >
-                    <span>${nume}</span>
+            if (categoryDiv) {
 
-                    <span class="price">
-                        ${pret} Lei
-                    </span>
-                </a>
-            `;
+                categoryDiv.innerHTML += `
+                    <a class="product"
+                       href="${link}"
+                       target="_blank">
+
+                        <span>${nume}</span>
+
+                        <span class="price">
+                            ${pret} Lei
+                        </span>
+
+                    </a>
+                `;
+            }
         }
 
     });
+}
 
     if (filtru && rezultate === 0) {
 
@@ -274,6 +302,27 @@ themeToggle.addEventListener("click", () => {
     }
 
 });
+
+function toggleCategory(id, element){
+
+    const content =
+        document.getElementById(id);
+
+    if(content.style.display === "block"){
+
+        content.style.display = "none";
+
+        element.innerHTML =
+            element.innerHTML.replace("▼","▶");
+
+    }else{
+
+        content.style.display = "block";
+
+        element.innerHTML =
+            element.innerHTML.replace("▶","▼");
+    }
+}
     
 </script>
 
