@@ -147,6 +147,13 @@ body.dark .category{
     box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
+.contact{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-weight:600;
+}
+    
 .logo{
     font-size:28px;
     font-weight:900;
@@ -200,7 +207,7 @@ body.dark .site-footer{
 .whatsapp-button{
     position:fixed;
     bottom:20px;
-    right:20px;
+    right:max(20px, calc((100vw - 1000px) / 2 + 20px));
     width:65px;
     height:65px;
     border-radius:50%;
