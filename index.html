@@ -79,14 +79,13 @@ fetch(url)
 
 function afiseazaProduse(filtru = "") {
 
-    const container =
-        document.getElementById("products");
+    const container = document.getElementById("products");
 
     container.innerHTML = "";
 
     produse
         .filter(p =>
-            p.Nume
+            (p.Producator || "")
             .toLowerCase()
             .includes(filtru.toLowerCase())
         )
@@ -97,7 +96,7 @@ function afiseazaProduse(filtru = "") {
                href="${p.Link}"
                target="_blank">
 
-                <span>${p.Nume}</span>
+                <span>${p.Producator}</span>
 
                 <span class="price">
                     ${p.Pret} Lei
