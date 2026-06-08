@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Catalog Produse</title>
-<button id="themeToggle">🌙 Dark Mode</button>
 
 <style>
 body{
@@ -143,6 +142,7 @@ body.dark .category{
 <body>
 
 <h1>📱 Catalog Produse</h1>
+<button id="themeToggle">🌙 Dark Mode</button>
 
 <input
     type="text"
@@ -253,15 +253,6 @@ function afiseazaProduse(filtru = "") {
     });
 }
 
-    if (filtru && rezultate === 0) {
-
-        container.innerHTML = `
-            <div class="no-results">
-                Nu a fost găsit niciun produs.
-            </div>
-        `;
-    }
-}
 
 document
     .getElementById("search")
