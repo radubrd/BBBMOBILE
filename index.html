@@ -158,6 +158,12 @@ body.dark .category{
     margin-left:auto;
 }
 
+.footer-contact{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+    
 .contact a{
     text-decoration:none;
 }
@@ -430,22 +436,32 @@ function toggleCategory(id, element){
 </script>
 
 <footer class="site-footer">
-    <div>BBB Mobile</div>
 
     <div>
-        ☎️ 0767 390 261 |
-        <a href="privacy.html">Politică de confidențialitate</a>
+        BBB Mobile
     </div>
-</footer> 
 
-<a
-    href="https://wa.me/40767390261?text=Salut,%20sunt%20interesat%20de%20un%20produs%20de%20pe%20BBB%20Mobile."
-    class="whatsapp-button"
-    target="_blank"
-    title="Contactează-ne pe WhatsApp"
->
-    💬 WhatsApp
-</a>    
+    <div class="footer-contact">
+
+        <span>☎️ 0767 390 261</span>
+
+        <a
+            href="https://wa.me/40767390261?text=Salut,%20sunt%20interesat%20de%20un%20produs%20de%20pe%20BBB%20Mobile."
+            class="whatsapp-header"
+            target="_blank"
+        >
+            💬 WhatsApp
+        </a>
+
+        |
+
+        <a href="privacy.html">
+            Politică de confidențialitate
+        </a>
+
+    </div>
+
+</footer>
     
 </body>
 </html>
