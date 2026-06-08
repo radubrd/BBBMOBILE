@@ -161,6 +161,21 @@ body.dark .category{
     font-weight:600;
 }
 
+.whatsapp-header{
+    margin-left:15px;
+    background:#25D366;
+    color:white;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+.whatsapp-header:hover{
+    opacity:0.9;
+}
+    
 .site-footer{
     margin-top:50px;
     padding:20px;
@@ -181,6 +196,29 @@ body.dark .site-footer{
 .site-footer a{
     color: inherit;
 }
+
+.whatsapp-button{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    z-index:9999;
+    transition:.2s;
+}
+
+.whatsapp-button:hover{
+    transform:scale(1.1);
+}    
     
     
 </style>
@@ -193,12 +231,18 @@ body.dark .site-footer{
 
     <div class="logo">
     <img src="logo.png" alt="BBB Mobile">
+<div class="contact">
+    ☎️ 0767 390 261
+
+    <a
+        href="https://wa.me/40767390261?text=Salut,%20sunt%20interesat%20de%20un%20produs%20de%20pe%20BBB%20Mobile."
+        class="whatsapp-header"
+        target="_blank"
+    >
+        💬 WhatsApp
+    </a>
 </div>
-
-    <div class="contact">
-        ☎️ 0767 390 261
-    </div>
-
+        
 </header>
     
 <h1>📱 Catalog Produse</h1>
@@ -409,6 +453,15 @@ function toggleCategory(id, element){
         <a href="privacy.html">Politică de confidențialitate</a>
     </div>
 </footer> 
+
+<a
+    href="https://wa.me/40767390261?text=Salut,%20sunt%20interesat%20de%20un%20produs%20de%20pe%20BBB%20Mobile."
+    class="whatsapp-button"
+    target="_blank"
+    title="Contactează-ne pe WhatsApp"
+>
+    💬 WWhatsApp
+</a>    
     
 </body>
 </html>
