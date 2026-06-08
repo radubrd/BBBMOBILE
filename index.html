@@ -74,39 +74,68 @@ fetch(url)
 
     produse = data;
 
-    afiseazaProduse();
-});
-
-function afiseazaProduse(filtru = "") {
+    function afiseazaProduse(filtru = "") {
 
     const container = document.getElementById("products");
 
     container.innerHTML = "";
 
-    produse
-        .filter(p =>
-            (p.Producator || "")
-            .toLowerCase()
-            .includes(filtru.toLowerCase())
-        )
-        .forEach(p => {
+    produse.forEach(p => {
+
+        const tip = p.Tip || "";
+        const nume = p.Producator || "";
+        const pret = p.Pret || "";
+        const link = p.Link || "#";
+
+        if (tip === "produs" &&
+            !nume.toLowerCase().includes(filtru.toLowerCase()))
+            return;
+
+        if (tip === "brand") {
 
             container.innerHTML += `
-            <a class="product"
-               href="${p.Link}"
-               target="_blank">
-
-                <span>${p.Producator}</span>
-
-                <span class="price">
-                    ${p.Pret} Lei
-                </span>
-
-            </a>
+                <h2 style="
+                    margin-top:30px;
+                    margin-bottom:15px;
+                    color:#222;
+                    border-bottom:2px solid #ddd;
+                    padding-bottom:5px;">
+                    ${nume}
+                </h2>
             `;
-        });
-}
+        }
 
+        else if (tip === "categorie") {
+
+            container.innerHTML += `
+                <h3 style="
+                    margin-top:20px;
+                    margin-bottom:10px;
+                    color:#666;">
+                    ${nume}
+                </h3>
+            `;
+        }
+
+        else if (tip === "produs") {
+
+            container.innerHTML += `
+                <a class="product"
+                   href="${link}"
+                   target="_blank">
+
+                    <span>${nume}</span>
+
+                    <span class="price">
+                        ${pret} Lei
+                    </span>
+
+                </a>
+            `;
+        }
+
+    });
+}
 document
 .getElementById("search")
 .addEventListener("input", e => {
