@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalog Produse</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+    background:#f4f4f4;
+}
+
+h1{
+    text-align:center;
+}
+
+#search{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.product{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    background:white;
+    border-radius:10px;
+    margin-bottom:10px;
+    text-decoration:none;
+    color:black;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+.product:hover{
+    transform:translateY(-1px);
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<h1>Catalog Produse</h1>
+
+<input type="text" id="search" placeholder="Caută produs...">
+
+<div id="products"></div>
+
+<script>
+
+const sheetId = "2PACX-1vRXmG1g04C1ZJRodkDCgctVuw-YVFBMnvyW619bc577I-bPWwSvN0modKD65d7Acb5OMUI8KEO5okyf";
+
+const url =
+`https://opensheet.elk.sh/${sheetId}/Sheet1`;
+
+let produse = [];
+
+fetch(url)
+.then(r => r.json())
+.then(data => {
+
+    produse = data;
+
+    afiseazaProduse();
+});
+
+function afiseazaProduse(filtru = "") {
+
+    const container =
+        document.getElementById("products");
+
+    container.innerHTML = "";
+
+    produse
+        .filter(p =>
+            p.Nume
+            .toLowerCase()
+            .includes(filtru.toLowerCase())
+        )
+        .forEach(p => {
+
+            container.innerHTML += `
+            <a class="product"
+               href="${p.Link}"
+               target="_blank">
+
+                <span>${p.Nume}</span>
+
+                <span class="price">
+                    ${p.Pret} Lei
+                </span>
+
+            </a>
+            `;
+        });
+}
+
+document
+.getElementById("search")
+.addEventListener("input", e => {
+    afiseazaProduse(e.target.value);
+});
+
+</script>
+
+</body>
+</html>
