@@ -136,11 +136,78 @@ body.dark .category{
     margin-bottom:15px;
 }    
 
+.site-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    padding:15px 20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+}
+
+.logo img{
+    height:60px;
+}    
+    
+.contact{
+    font-size:18px;
+    font-weight:600;
+}
+
+.site-footer{
+    margin-top:50px;
+    padding:20px;
+    background:white;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+body.dark .site-header,
+body.dark .site-footer{
+    background:#1e1e1e;
+    color:white;
+}
+    
     
 </style>
 </head>
+
+<footer class="site-footer">
+
+    <div>
+        © 2026 BBB Mobile
+    </div>
+
+    <div>
+        ☎️ 07XX XXX XXX
+    </div>
+
+</footer>    
+    
 <body>
 
+<header class="site-header">
+
+    <div class="logo">
+    <img src="logo.png" alt="BBB Mobile">
+</div>
+
+    <div class="contact">
+        ☎️ 0767 390 261
+    </div>
+
+</header>
+    
 <h1>📱 Catalog Produse</h1>
 <button id="themeToggle">🌙 Dark Mode</button>
 
