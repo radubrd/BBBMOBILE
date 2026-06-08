@@ -211,11 +211,12 @@ function afiseazaProduse(filtru = "") {
             container.innerHTML += `
                 <div class="category"
                      onclick="toggleCategory('${currentCategoryId}', this)">
-                    ▶ ${nume}
+                    ${filtru ? '▼' : '▶'} ${nume}
                 </div>
 
                 <div id="${currentCategoryId}"
-                     class="category-products">
+                     class="category-products"
+                     style="${filtru ? 'display:block' : 'display:none'}">
                 </div>
             `;
         }
