@@ -223,12 +223,18 @@ function afiseazaProduse(filtru = "") {
 
         else if (tip === "produs") {
 
-            if (
-                filtru &&
-                !nume.toLowerCase().includes(filtru.toLowerCase())
-            ) {
-                return;
-            }
+            if (filtru) {
+
+    const query = filtru
+        .toLowerCase()
+        .trim()
+        .split(/\s+/);
+
+    const text = nume.toLowerCase();
+
+    if (!query.every(word => text.includes(word)))
+        return;
+}
 
             const categoryDiv =
                 document.getElementById(currentCategoryId);
