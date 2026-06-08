@@ -7,53 +7,82 @@
 
 <style>
 body{
-    font-family:Arial,sans-serif;
-    max-width:900px;
-    margin:auto;
-    padding:20px;
-    background:#f4f4f4;
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+    background: #f4f4f4;
 }
 
 h1{
-    text-align:center;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 #search{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    margin-bottom:20px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.brand{
+    margin-top: 35px;
+    margin-bottom: 15px;
+    color: #111;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.category{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+    border-left: 4px solid #999;
+    padding-left: 10px;
 }
 
 .product{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px;
-    background:white;
-    border-radius:10px;
-    margin-bottom:10px;
-    text-decoration:none;
-    color:black;
-    box-shadow:0 2px 5px rgba(0,0,0,.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    transition: .15s;
 }
 
 .product:hover{
-    transform:translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .price{
-    color:green;
-    font-weight:bold;
+    color: green;
+    font-weight: bold;
+}
+
+.no-results{
+    text-align: center;
+    color: #777;
+    margin-top: 30px;
 }
 </style>
 </head>
 <body>
 
-<h1>Catalog Produse</h1>
+<h1>📱 Catalog Produse</h1>
 
-<input type="text" id="search" placeholder="Caută produs...">
+<input
+    type="text"
+    id="search"
+    placeholder="Caută produs..."
+>
 
 <div id="products"></div>
 
@@ -61,86 +90,102 @@ h1{
 
 const sheetId = "1Um6EaoSLswkMltar9K5MitBjdK6E00ahfPQtzT0BLyg";
 
-const url =
-`https://opensheet.elk.sh/${sheetId}/Produse`;
+const url = `https://opensheet.elk.sh/${sheetId}/Produse`;
 
 let produse = [];
 
 fetch(url)
-.then(r => r.json())
-.then(data => {
+    .then(response => response.json())
+    .then(data => {
 
-    console.log(data);
+        console.log("Date primite:", data);
 
-    produse = data;
+        produse = data;
 
-    function afiseazaProduse(filtru = "") {
+        afiseazaProduse();
+    })
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("products").innerHTML =
+            "<div class='no-results'>Eroare la încărcarea produselor.</div>";
+    });
+
+function afiseazaProduse(filtru = "") {
 
     const container = document.getElementById("products");
 
     container.innerHTML = "";
 
+    let rezultate = 0;
+
     produse.forEach(p => {
 
-        const tip = p.Tip || "";
-        const nume = p.Producator || "";
-        const pret = p.Pret || "";
-        const link = p.Link || "#";
+        const tip = String(p.Tip || "").trim().toLowerCase();
+        const nume = String(p.Producator || "").trim();
+        const pret = String(p.Pret || "").trim();
+        const link = String(p.Link || "#").trim();
 
-        if (tip === "produs" &&
-            !nume.toLowerCase().includes(filtru.toLowerCase()))
-            return;
-console.log("TIP:", tip, "NUME:", nume);
         if (tip === "brand") {
 
             container.innerHTML += `
-                <h2 style="
-                    margin-top:30px;
-                    margin-bottom:15px;
-                    color:#222;
-                    border-bottom:2px solid #ddd;
-                    padding-bottom:5px;">
-                    ${nume}
-                </h2>
+                <h2 class="brand">${nume}</h2>
             `;
         }
 
         else if (tip === "categorie") {
 
             container.innerHTML += `
-                <h3 style="
-                    margin-top:20px;
-                    margin-bottom:10px;
-                    color:#666;">
-                    ${nume}
-                </h3>
+                <h3 class="category">${nume}</h3>
             `;
         }
 
         else if (tip === "produs") {
 
-            container.innerHTML += `
-                <a class="product"
-                   href="${link}"
-                   target="_blank">
+            if (
+                filtru &&
+                !nume.toLowerCase().includes(filtru.toLowerCase())
+            ) {
+                return;
+            }
 
+            rezultate++;
+
+            container.innerHTML += `
+                <a
+                    class="product"
+                    href="${link}"
+                    target="_blank"
+                >
                     <span>${nume}</span>
 
                     <span class="price">
                         ${pret} Lei
                     </span>
-
                 </a>
             `;
         }
 
     });
+
+    if (filtru && rezultate === 0) {
+
+        container.innerHTML = `
+            <div class="no-results">
+                Nu a fost găsit niciun produs.
+            </div>
+        `;
+    }
 }
+
 document
-.getElementById("search")
-.addEventListener("input", e => {
-    afiseazaProduse(e.target.value);
-});
+    .getElementById("search")
+    .addEventListener("input", function(e){
+
+        afiseazaProduse(e.target.value);
+
+    });
 
 </script>
 
