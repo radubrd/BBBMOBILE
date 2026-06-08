@@ -241,19 +241,36 @@ function afiseazaProduse(filtru = "") {
 
             if (categoryDiv) {
 
-                categoryDiv.innerHTML += `
-                    <a class="product"
-                       href="${link}"
-                       target="_blank">
+                if (link && link !== "#") {
 
-                        <span>${nume}</span>
+    categoryDiv.innerHTML += `
+        <a class="product"
+           href="${link}"
+           target="_blank">
 
-                        <span class="price">
-                            ${pret} Lei
-                        </span>
+            <span>${nume} 🔗</span>
 
-                    </a>
-                `;
+            <span class="price">
+                ${pret} Lei
+            </span>
+
+        </a>
+    `;
+
+} else {
+
+    categoryDiv.innerHTML += `
+        <div class="product">
+
+            <span>${nume}</span>
+
+            <span class="price">
+                ${pret} Lei
+            </span>
+
+        </div>
+    `;
+}
             }
         }
 
