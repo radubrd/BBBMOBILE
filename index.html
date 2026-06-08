@@ -162,12 +162,14 @@ body.dark .category{
     gap:15px;
     margin-left:auto;
     color:wwhite;
+    flex-wrap:wrap;  
 }
 
 .footer-contact{
     display:flex;
     align-items:center;
     gap:12px;
+    flex-wrap:wrap;  
 }
     
 .contact a{
@@ -210,6 +212,38 @@ body.dark .site-footer{
     color: inherit;
 }
 
+@media (max-width: 768px){
+
+    .site-header{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .contact{
+        margin-left:0;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .site-footer{
+        flex-direction:column;
+        text-align:center;
+        gap:15px;
+    }
+
+    .footer-contact{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .logo img{
+        max-width:250px;
+        height:auto;
+    }
+
+}
+      
         
 </style>
     
